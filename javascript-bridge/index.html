@@ -42,7 +42,7 @@
             <input type="text" id="input-data" class="form-control" placeholder="Input text to send to native"
                 aria-label="Recipient's username" aria-describedby="button-addon2">
             <button class="btn btn-outline-secondary" type="button" id="button-addon2"
-                onClick="myFunction()">OK</button>
+                onClick="callNativeUpdateText()">OK</button>
         </div>
 
         <hr>
@@ -53,37 +53,49 @@
         <div id="native-event-list">
         </div>
 
-
-
     </div>
     <script>
-        function myFunction() {
+        function callNativeUpdateText() {
+            // input 테그에서 입력된 데이터를 가져오기 
             const inputData = document.getElementById("input-data").value
-            console.log("myFunction() innerData:", inputData)
+            console.log("callNativeUpdateText() innerData:", inputData)
 
-            document.getElementById("native-event-list").innerHTML = document.getElementById("native-event-list").innerHTML +
-                '<div class="alert alert-warning alert-dismissible fade show" role="alert">' +
-                'Click Native Button 1' +
-                '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' +
-                '</div>'
+            // Native로 데이터를 보내기 
+            try {
+                // 프로젝트 시작할 때 여러가지 서비스를 통신하기 위해 인터페이스를 구분해서 정의하는 것이 좋다.
+                // 예시) loginInterface, memberInterface, mainInterface, gpsInterface, searchInterface
+                // 다양한 타입의 데이터 처리를 위해 json 데이터를 String으로 변환하여 통신한다.
+                // 예시) {"screenSize": {"width": 1024, "height": 864}}
+                webkit.messageHandlers.exampleInteface.postMessage(`{"command": "label", "data": "${inputData}"}'`)
+            } catch (err) {
+                alert(err)
+            }
         }
 
+        // Native로부터 호출되어 Alert 창을 표시한다. 
         function clickNativeButton01() {
             console.log("clickNativeButton01()")
-            document.getElementById("native-event-list").innerHTML = document.getElementById("native-event-list").innerHTML +
-                '<div class="alert alert-warning alert-dismissible fade show" role="alert">' +
-                'Click Native Button 1' +
-                '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' +
-                '</div>'
+            document.getElementById("native-event-list").innerHTML =
+                document.getElementById("native-event-list").innerHTML +
+                `
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    Click Native Button 1
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                `
         }
 
+        // Native로부터 호출되어 Alert 창을 표시한다. 
         function clickNativeButton02() {
             console.log("clickNativeButton02()")
-            document.getElementById("native-event-list").innerHTML = document.getElementById("native-event-list").innerHTML +
-                '<div class="alert alert-danger alert-dismissible fade show" role="alert">' +
-                'Click Native Button 2' +
-                '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' +
-                '</div>'
+            document.getElementById("native-event-list").innerHTML =
+                document.getElementById("native-event-list").innerHTML +
+                `
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Click Native Button 2
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                `
         }
     </script>
 
