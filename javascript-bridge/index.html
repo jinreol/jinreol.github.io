@@ -66,7 +66,7 @@
                 // 예시) loginInterface, memberInterface, mainInterface, gpsInterface, searchInterface
                 // 다양한 타입의 데이터 처리를 위해 json 데이터를 String으로 변환하여 통신한다.
                 // 예시) {"screenSize": {"width": 1024, "height": 864}}
-                webkit.messageHandlers.exampleInteface.postMessage(`{"command": "label", "data": "${inputData}"}'`)
+                window.webkit.messageHandlers.exampleInteface.postMessage(`{"command": "label", "data": "${inputData}"}'`)
             } catch (err) {
                 alert(err)
             }
