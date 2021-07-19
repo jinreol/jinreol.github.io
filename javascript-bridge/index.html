@@ -32,7 +32,7 @@
 
 <body>
     <div class="container">
-        <h1 class="title text-secondary">Native <-> Web Communication Test Page [v0.3]</h1>
+        <h1 class="title text-secondary">Native <-> Web Communication Test Page [v0.32]</h1>
 
         <hr>
 
@@ -70,9 +70,9 @@
         function callNativeUpdateText() {
             // input 테그에서 입력된 데이터를 가져오기 
             const inputData = document.getElementById("input-data").value
-            console.log("callNativeUpdateText() innerData:", inputData)
+            console.log("callNativeUpdateText() inputData:", inputData)
 
-            if (innerData === "") {
+            if (inputData == "") {
                 alert("텍스트를 입력해 주세요.")
                 return
             }
