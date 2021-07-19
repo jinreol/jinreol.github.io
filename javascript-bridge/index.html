@@ -32,7 +32,7 @@
 
 <body>
     <div class="container">
-        <h1 class="title text-secondary">[02] Native <-> Web Communication Test Page</h1>
+        <h1 class="title text-secondary">Native <-> Web Communication Test Page [v0.3]</h1>
 
         <hr>
 
@@ -72,6 +72,10 @@
             const inputData = document.getElementById("input-data").value
             console.log("callNativeUpdateText() innerData:", inputData)
 
+            if (innerData === "") {
+                alert("텍스트를 입력해 주세요.")
+                return
+            }
             // Native로 데이터를 보내기 
             try {
                 // 프로젝트 시작할 때 여러가지 서비스를 통신하기 위해 인터페이스를 구분해서 정의하는 것이 좋다.
