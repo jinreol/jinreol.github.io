@@ -42,9 +42,12 @@
             <input type="text" id="input-data" class="form-control" placeholder="Input text to send to native"
                 aria-label="Recipient's username" aria-describedby="button-addon2">
             <button class="btn btn-outline-secondary" type="button" id="button-addon2"
-                onClick="callNativeUpdateText()">OK</button>
+                onclick="callNativeUpdateText()">OK</button>
         </div>
 
+        <div class="d-grid gap-2">
+            <button class="btn btn-outline-secondary" onclick="callOpenNativeView()">Open Native View</button>
+        </div>
         <hr>
 
         <h3 class="sub-title text-success">Native -> Web</h3>
@@ -68,6 +71,7 @@
     -->
     <script>
         function callNativeUpdateText() {
+            console.log("callNativeUpdateText()")
             // input 테그에서 입력된 데이터를 가져오기 
             const inputData = document.getElementById("input-data").value
             console.log("callNativeUpdateText() inputData:", inputData)
@@ -83,6 +87,15 @@
                 // 다양한 타입의 데이터 처리를 위해 json 데이터를 String으로 변환하여 통신한다.
                 // 예시) {"screenSize": {"width": 1024, "height": 864}}
                 window.webkit.messageHandlers.exampleInteface.postMessage(`{"command": "label", "data": "${inputData}"}`)
+            } catch (err) {
+                alert(err)
+            }
+        }
+
+        function callOpenNativeView() {
+            console.log("callOpenNativeView()")
+            try {
+                window.webkit.messageHandlers.exampleInteface.postMessage(`{"command": "open", "data": ""}`)
             } catch (err) {
                 alert(err)
             }
